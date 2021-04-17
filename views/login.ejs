@@ -1,0 +1,60 @@
+<%- include('./shared/headers.ejs') %>
+<body id="login">
+    <div class="overlay">
+        <!-- ================================spinner============================== -->
+        <div class="parent-spinner">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+        <!-- ================================/spinner============================== -->
+
+        <!-- ======================login form================================= -->
+
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-md-6 m-auto p-5">
+                    <div class="form p-5 ">
+                        <h2 class="text-center text-white">Sign In</h2>
+
+                        <form action="handelLogin" method="POST">
+                            <input value="<%= oldDATA.length==0?'':oldDATA[0].Email%>" name="Email" placeholder="Email" type="email" class="form-control my-4 inp" type="text">
+                            <% if (errors.find(e => e.param == 'Email')) { %>
+                                <div class="alert alert-danger text-center">
+                                    invalid email
+                                </div>
+                            <% } %>
+                            <input name="Password" placeholder="Password" type="password" class="form-control my-4 inp" type="text">
+                            <% if (errors.find(e => e.param == 'Password')) { %>
+                                <div class="alert alert-danger text-center">
+                                    invalid password
+                                </div>
+                            <% } %>
+                            <% if (emailexist.length !=0) { %>
+                                <div class="alert alert-danger text-center">
+                                    email is doesn't exists
+                                </div>
+                            <% } %>
+                            <% if (mypassword[0]) { %>
+                                <div class="alert alert-danger text-center">
+                                    invalid password
+                                </div>
+                            <% } %>
+                            <button class="btn btn-outline-info w-100 text-white">Login</button>
+                            <p class="text-center text-white pt-3">
+                                Don't Have an account..? <a href="/register" class="text-white">Sign Up Here</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <%- include('./shared/footer.ejs') %>

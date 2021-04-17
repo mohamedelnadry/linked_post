@@ -1,0 +1,106 @@
+<%- include('./shared/headers.ejs') %>
+    <%- include('./shared/navbar.ejs') %>
+
+        <body id="home">
+            <div class="cover">
+
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="editmodel" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header text-center text-white">
+                            <h5 class="modal-title " id="exampleModalLabel">Edit Postt</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span class="text-white" aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/editPOST" method="post">
+                            <div class="modal-body">
+                                <input name="Newtitle" id="titlePOST" class="form-control my-3" placeholder="Enter Title" type="text">
+                                <textarea class="form-control" placeholder="Enter Text" name="Newdesc" id="descPOST" cols="30"
+                                    rows="10"></textarea>
+                                <input hidden type="text" id="postID" name="myid">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-info">edit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="deletemodle" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/delete" method="post">
+                            <div class="modal-body">
+                                <input hidden type="text" id="inputID" name="inputID">
+                                are you sure ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">no</button>
+                                <button type="submit" class="btn btn-primary">yes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 ">
+                        <div class="person card pb-5 px-5  text-center">
+                            <img src="images/man.jpg" width="250" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-8 pt-4">
+                        <h2>
+                            <%= username %>
+                        </h2>
+                        <h4 class="text-muted">Full Stack Web</h4>
+
+
+                        <% for( let index=0; index < data.length; index++ ) { %>
+                            <div class="post card p-4 auto">
+                                <div class="media">
+                                    <img src="images/man.jpg" width="60" class="mr-3" alt="...">
+                                    <div class="media-body">
+                                        <h5 class="mt-0">
+                                            <%= data[index].user_id.Username %>
+                                        </h5>
+                                        <p title="<%= format.formateDATE(data[index].time) %>"><%= format.formatTIME(data[index].time) %></p>
+                                    </div>
+                                    <div>
+                                        <a onclick="deletePOST('<%= data[index]._id %>')" data-toggle="modal"
+                                            data-target="#deletemodle" class="btn btn-danger">Delete</a>
+                                        <a onclick="editPost('<%= data[index]._id %>')" data-toggle="modal" data-target="#editmodel" class="btn btn-info">Edit</a>
+                                    </div>
+
+                                </div>
+                                <hr>
+                                <h3 id="title">
+                                    <%= data[index].title %>
+                                </h3>
+                                <p class="pt-4" id="desc">
+                                    <%= data[index].desc %>
+                                </p>
+
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <%- include('./shared/footer.ejs') %>
