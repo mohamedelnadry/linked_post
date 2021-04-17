@@ -28,10 +28,6 @@ app.use(require('./routes/login.routes'))
 app.use(require('./routes/register.routes'))
 app.use(require('./routes/profile.routes'))
 app.use(require('./routes/setting_user.routes'))
-app.get('*', (req, res) => {
-  res.send('404 errors')
-})
-
-
+app.use(require('./routes/pageNotFound'))
 mongoose.connect('mongodb+srv://admin:admin@cluster0.fjtlc.mongodb.net/LinekdPost', { useNewUrlParser: true, useUnifiedTopology: true }).catch(err => console.log(err.reason));
 app.listen(process.env.PORT || port, () => console.log(`Example app listening on port port!`))

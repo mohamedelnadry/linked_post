@@ -152,3 +152,10 @@ nav .nav-link ,.navbar-brand{
     top: -100%;
 }
 /* ============================================= /profile page style=========================== */
+
+.page {
+    background: #dedede;
+}
+.page-wrap {
+    min-height: 100vh;
+}
