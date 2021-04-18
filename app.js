@@ -5,10 +5,10 @@ const path = require('path')
 const mongoose = require('mongoose')
 const session = require('express-session')
 var flash = require('connect-flash');
-
+require('dotenv').config()
 var MongoDBStore = require('connect-mongodb-session')(session);
 var store = new MongoDBStore({
-  uri: 'mongodb+srv://admin:admin@cluster0.fjtlc.mongodb.net/LinekdPost',
+  uri: process.env.URL_DATABASE,
   collection: 'mySessions'
 });
 app.use(session({
@@ -29,5 +29,5 @@ app.use(require('./routes/register.routes'))
 app.use(require('./routes/profile.routes'))
 app.use(require('./routes/setting_user.routes'))
 app.use(require('./routes/pageNotFound'))
-mongoose.connect('mongodb+srv://admin:admin@cluster0.fjtlc.mongodb.net/LinekdPost', { useNewUrlParser: true, useUnifiedTopology: true }).catch(err => console.log(err.reason));
+mongoose.connect(process.env.URL_DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }).catch(err => console.log(err.reason));
 app.listen(process.env.PORT || port, () => console.log(`Example app listening on port port!`))
